@@ -1,0 +1,13 @@
+create routes
+define schema then migrate prisma and generate prisma client
+create endpoints
+protect write endpoints with authentication middleware
+apply input validation middleware to post and put endpoints
+apply upload middleware to create and edit user endpoints
+make error forwarding helper funtion, wrap all controller functions with it to implement global catch
+catch unimplemented endpoint with '*' route
+
+--> upload feature working as exprected in exp_backends/file_upload
+--> here upload not working so fix it by looking into the exp_backends/file_upload folder
+--> use the "ft" table which has existing users, their plain passwords and auth tokens
+--> remove all the multer code and implement multer newly and store the old multer code in some other file

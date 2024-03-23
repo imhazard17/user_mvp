@@ -1,0 +1,21 @@
+{
+  "name": "user_mvp",
+  "version": "1.0.0",
+  "description": "MVP with the feature to do CRUD on User resource and upload img for profile picture and write operations permitted to authenticated users and read to anyone",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rajarshi Barman",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^5.11.0",
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.1",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
+    "prisma": "^5.11.0",
+    "zod": "^3.22.4"
+  }
+}
