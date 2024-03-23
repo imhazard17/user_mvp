@@ -12,11 +12,12 @@ function userInputValidation(req, res, next) {
 
     try {
         schema.parse(req.body)
-        next()
-    } catch {
-        res.status(411).json({
+    } catch(e) {
+        return res.status(411).json({
             err: 'Wrong inputs recieved'
         })
+    } finally {
+        next()
     }
 }
 

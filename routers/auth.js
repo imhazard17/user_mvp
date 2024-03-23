@@ -21,17 +21,16 @@ router.post('/signup', [userInputValidation, upload.single('file')], errForward(
         }
     })
 
-    if(!createdUser) {
-        res.status(500).json({
+    if (!createdUser) {
+        return res.status(500).json({
             err: 'Could not create user'
         })
-        return
     }
 
     // on success return signed auth token
     const authToken = jwt.sign(createdUser.id, process.env.JWT_SECRET)
 
-    res.status(201).json({
+    return res.status(201).json({
         msg: `Successfully created user with id ${createdUser.id}`,
         authToken: authToken
     })
@@ -50,24 +49,22 @@ router.get('/login', [userInputValidation], errForward(async (req, res) => {
         }
     })
 
-    if(!user) {
-        res.status(500).json({
+    if (!user) {
+        return res.status(500).json({
             err: 'Could not login user'
         })
-        return
     }
 
-    if(bcrypt.compareSync(req.body.password, user.password) === false) {
-        res.status(404).json({
+    if (bcrypt.compareSync(req.body.password, user.password) === false) {
+        return res.status(404).json({
             err: 'Incorrect password',
         })
-        return
     }
 
     // on success return signed auth token
     const authToken = jwt.sign(user.id, process.env.JWT_SECRET)
 
-    res.status(200).json({
+    return res.status(200).json({
         msg: `Successfully logged in user with id ${user.id}`,
         authToken: authToken
     })

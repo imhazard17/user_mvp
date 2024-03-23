@@ -1,11 +1,8 @@
 const multer = require('multer')
 const crypto = require('crypto')
-const path = require('path')
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        console.log(`==========================================${req.url}============================================================`)
-
         if (req.url === '/user/update-details' || req.url === '/auth/signup') {
             cb(null, './uploads/profilePics/');
         }
