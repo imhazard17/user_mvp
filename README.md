@@ -1,4 +1,4 @@
-
+<pre>
 FUNCTIONALITY:-
 
 - User, Post, Like, Comment are the db resources
@@ -43,3 +43,4 @@ ii) GET /auth/login     [login user]
 
 (NOTE check which data to send in body by the schema of the resouces defined on `schema.prisma` file)
 (NOTE on endpoints /user/auth/signup and /user/change-details can upload minimum 0 files and maximum 1 file with key = `file` in formData field of body on postman)
+</pre>
