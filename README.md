@@ -1,4 +1,3 @@
-<pre>
 FUNCTIONALITY:-
 
 - User, Post, Like, Comment are the db resources
@@ -14,14 +13,14 @@ FUNCTIONALITY:-
 
 SETUP INSTRUCTIONS:-
 
-i) run `npm i`
-ii) install postgresql in your pc if not already installed. Watch this installation tutorial: https://www.youtube.com/watch?v=HmziePvMwkE
-iii) open `psql` using your credentials and keep the server running while testing the api
-iv) create .env file with apprepriate values of fields:-
+1) run `npm i`
+2) install postgresql in your pc if not already installed. Watch this installation tutorial: https://www.youtube.com/watch?v=HmziePvMwkE
+3) open `psql` using your credentials and keep the server running while testing the api
+4) create .env file with apprepriate values of fields:-
 ![Screenshot](https://github.com/imhazard17/user_mvp/assets/57060375/29288738-1434-45a1-838d-80adf623c58d)
-v) run `npx prisma migrate dev --name init`
-vi) run `prisma generate`
-vii) run `node app.js` and using postman run test the api endpoints
+5) run `npx prisma migrate dev --name init`
+6) run `prisma generate`
+7) run `node app.js` and using postman run test the api endpoints
 
 -------------------------------------------------------------------------------------------------------------------------------------
 
@@ -30,17 +29,16 @@ API ENDPOINTS:-     (NOTE: ** means it is a protected route hence should send au
 
 USERS:
 
-i) GET /user/all     [get all users]
-ii) GET /user/my-details**    [get current logged in user]
-iii) GET /user/search/:username     [get user based on searched username]
-iv) PUT /user/change-details**        [update user details]
-v) DELETE /user/delete-profile**        [delete logged in user]
+1) GET /user/all     [get all users]
+2) GET /user/my-details**    [get current logged in user]
+3) GET /user/search/:username     [get user based on searched username]
+4) PUT /user/change-details**        [update user details]
+5) DELETE /user/delete-profile**        [delete logged in user]
 
 AUTH:
 
-i) POST /auth/signup      [create new user]
-ii) GET /auth/login     [login user]
+6) POST /auth/signup      [create new user]
+7) GET /auth/login     [login user]
 
 (NOTE check which data to send in body by the schema of the resouces defined on `schema.prisma` file)
 (NOTE on endpoints /user/auth/signup and /user/change-details can upload minimum 0 files and maximum 1 file with key = `file` in formData field of body on postman)
-</pre>
