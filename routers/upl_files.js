@@ -5,7 +5,7 @@ const { userInputValidation } = require('../middlewares/input_validation')
 const authentication = require('../middlewares/authentication')
 
 // PUT /upl/upload
-router.put('/upload', [upload.single('file'), userInputValidation, authentication], errForward(async (req, res) => {
+router.put('/upload', [userInputValidation, authentication, upload.single('file')], errForward(async (req, res) => {
     if (!req.file) {
         return res.status(404).json({ err: 'File not uploaded' })
     }
