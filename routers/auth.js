@@ -1,13 +1,16 @@
 const router = require('express').Router()
 const errForward = require('../utils/errorForward')
 const upload = require('../middlewares/upload')
-const { userInputValidation } = require('../middlewares/input_validation')
+const { userSchema } = require('../utils/input_validation')
 const prisma = require('../utils/db')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const authentication = require('../middlewares/authentication')
 
 // POST /auth/signup (create new user)
-router.post('/signup', [userInputValidation, upload.single('file')], errForward(async (req, res) => {
+router.post('/signup', [upload.single('file')], errForward(async (req, res) => {
+    userSchema.parse(req.body)
+
     // create new user with prisma and hash the given password
     const createdUser = await prisma.user.create({
         data: {
@@ -37,7 +40,9 @@ router.post('/signup', [userInputValidation, upload.single('file')], errForward(
 }))
 
 // GET /auth/login
-router.get('/login', [userInputValidation], errForward(async (req, res) => {
+router.get('/login', errForward(async (req, res) => {
+    userSchema.parse(req.body)
+
     // bcrypt compare the given pass with stored hashed pass
     const user = await prisma.user.findUnique({
         where: {

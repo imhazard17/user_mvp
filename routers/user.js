@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const errForward = require('../utils/errorForward')
 const upload = require('../middlewares/upload')
-const { userInputValidation } = require('../middlewares/input_validation')
+const { userSchema } = require('../utils/input_validation')
 const authentication = require('../middlewares/authentication')
 const bcrypt = require('bcrypt')
 const prisma = require('../utils/db')
@@ -17,7 +17,7 @@ router.post('/my-details', [authentication], errForward(async (req, res) => {
         }
     })
 
-    if(!user) {
+    if (!user) {
         return res.status(500).json({
             err: 'Could not fetch user details'
         })
@@ -40,7 +40,7 @@ router.post('/all', errForward(async (req, res) => {
         }
     })
 
-    if(!users) {
+    if (!users) {
         return res.status(500).json({
             err: 'Could not fetch users details'
         })
@@ -64,17 +64,19 @@ router.post('/search/:username', errForward(async (req, res) => {
         }
     })
 
-    if(!user) {
+    if (!user) {
         return res.status(500).json({
             err: 'Could not fetch user details'
         })
     }
 
     return res.status(200).json(user)
-})) 
+}))
 
 // PUT /user/update-details
-router.put('/update-details', [userInputValidation, authentication, upload.single('file')], errForward(async (req, res) => {
+router.put('/update-details', [authentication, upload.single('file')], errForward(async (req, res) => {
+    userSchema.parse(req.body)
+
     const userId = req.locals.userId
 
     const updatedUser = await prisma.user.update({
@@ -90,7 +92,7 @@ router.put('/update-details', [userInputValidation, authentication, upload.singl
         },
     })
 
-    if(!updatedUser) {
+    if (!updatedUser) {
         return res.status(500).json({
             err: 'Could not update user details'
         })
@@ -123,7 +125,7 @@ router.post('/delete-profile', [authentication], errForward(async (req, res) => 
         }
     })
 
-    if(!deletedUser) {
+    if (!deletedUser) {
         return res.status(500).json({
             err: 'Could not delete user'
         })

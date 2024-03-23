@@ -1,11 +1,17 @@
 const router = require('express').Router()
 const upload = require('../middlewares/upload')
 const errForward = require('../utils/errorForward')
-const { userInputValidation } = require('../middlewares/input_validation')
+const { userSchema } = require('../utils/input_validation')
 const authentication = require('../middlewares/authentication')
 
 // PUT /upl/upload
-router.put('/upload', [userInputValidation, authentication, upload.single('file')], errForward(async (req, res) => {
+router.put('/upload', authentication, upload.single('file'), errForward(async (req, res) => {
+    console.log(`====${JSON.stringify(req.body)}====`)
+
+    userSchema.parse(req.body)
+    
+    console.log('validated and authenticated')
+
     if (!req.file) {
         return res.status(404).json({ err: 'File not uploaded' })
     }

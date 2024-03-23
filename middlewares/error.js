@@ -1,7 +1,13 @@
 const { Prisma } = require("@prisma/client")
+const { ZodError } = require("zod")
 
 function error(error, req, res, next) {
     console.log(error)
+    if(error instanceof ZodError) {
+        return res.status(400).json({
+            err: 'Wrong inputs sent'
+        })
+    }
     if (error.code === 'LIMIT_UNEXPECTED_FILE') {
         return res.status(400).json({
             err: 'Too many files uploaded'
