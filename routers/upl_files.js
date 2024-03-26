@@ -8,7 +8,7 @@ const authentication = require('../middlewares/authentication')
 router.put('/upload', authentication, upload.single('file'), errForward(async (req, res) => {
     console.log(`====${JSON.stringify(req.body)}====`)
 
-    userSchema.parse(req.body)
+    // userSchema.parse(req.body)
     
     console.log('validated and authenticated')
 
